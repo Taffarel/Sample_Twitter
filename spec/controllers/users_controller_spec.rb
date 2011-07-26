@@ -42,6 +42,11 @@ describe UsersController do
           post :create, :user => @attr
         end.should change(User, :count).by(1)
       end
+      
+       it "should sign the user in" do
+        post :create, :user => @attr
+        controller.should be_signed_in
+      end
 
       it "should redirect to the user show page" do
         post :create, :user => @attr
@@ -50,7 +55,7 @@ describe UsersController do
       
       it "should have a welcome message" do
         post :create, :user => @attr
-        flash[:success].should =~ /welcome to the sample app/i
+        flash[:success].should =~ /welcome to the sample Twitter/i
       end
     end
   end
